@@ -22,7 +22,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/TerraTech/gzipInfo/pkg/gzip"
+	"github.com/TerraTech/gzipInfo/pkg/gzipInfo"
 )
 
 const VERSION = "1.0.0"

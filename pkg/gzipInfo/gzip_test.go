@@ -22,7 +22,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/TerraTech/gzipInfo/pkg/gzip"
+	"github.com/TerraTech/gzipInfo/pkg/gzipInfo"
 
 	"github.com/stretchr/testify/assert"
 )
