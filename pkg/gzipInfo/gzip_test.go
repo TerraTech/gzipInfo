@@ -18,8 +18,8 @@
 package gzipInfo_test
 
 import (
-	"path/filepath"
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/TerraTech/gzipInfo/pkg/gzipInfo"
@@ -29,8 +29,25 @@ import (
 
 var d_base = filepath.Join(os.Getenv("GOPATH"), "src/github.com/TerraTech/gzipInfo")
 
+var dj = func(name string) string {
+	return filepath.Join(d_base, "files", name)
+}
+
+func TestIsGzip(t *testing.T) {
+	var expectations = []struct {
+		name   string
+		isGzip bool
+	}{
+		{"notagzipfile.gz", false},
+		{"test-26.gz", true},
+	}
+
+	assert.False(t, gzipInfo.IsGzip(dj(expectations[0].name)))
+	assert.True(t, gzipInfo.IsGzip(dj(expectations[1].name)))
+}
+
 func TestUncompressedSize(t *testing.T) {
-	var expectations = []struct{
+	var expectations = []struct {
 		name string
 		size uint32
 	}{

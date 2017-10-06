@@ -18,13 +18,35 @@
 package gzipInfo
 
 import (
+	"fmt"
 	"os"
 )
 
 const whence_end = 2
 
+// IsGzip verifies the GZIP header magic bytes: 0x1F 0x8B
+func IsGzip(name string) bool {
+	fGzip, err := os.Open(name)
+	if err != nil {
+		return false
+	}
+	defer fGzip.Close()
+
+	magic := make([]byte, 2)
+	_, err = fGzip.Read(magic)
+	if err != nil {
+		return false
+	}
+
+	return magic[0] == 0x1f && magic[1] == 0x8b
+}
+
 // UncompressedSize returns the gzip (RFC 1952) uncompressed file size.
 func UncompressedSize(name string) (uint32, error) {
+	if !IsGzip(name) {
+		return 0, fmt.Errorf("file is not gzip compressed")
+	}
+
 	fGzip, err := os.Open(name)
 	if err != nil {
 		return 0, err
