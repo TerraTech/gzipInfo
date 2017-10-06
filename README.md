@@ -1,3 +1,4 @@
+[![GoDoc](https://godoc.org/github.com/TerraTech/gzipInfo/pkg/gzipInfo?status.svg)](https://godoc.org/github.com/TerraTech/gzipInfo/pkg/gzipInfo)
 ## gzipInfo
 
 This is a small util when one needs to retrieve the GZIP (RFC 1952) uncompressed filesize for scripts and such.
