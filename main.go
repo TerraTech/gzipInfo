@@ -18,6 +18,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -25,18 +26,27 @@ import (
 	"github.com/TerraTech/gzipInfo/pkg/gzipInfo"
 )
 
-const VERSION = "1.0.0"
+var (
+	flagLShowVersion bool
+	flagShowVersion  bool
+	flagShowUsage    bool
+)
 
 func usage() {
-	fmt.Printf("usage: %s file.gz...\n", filepath.Base(os.Args[0]))
-	fmt.Printf("version: %s", VERSION)
+	fmt.Printf("usage: %s [flags] file.gz...\n\n", filepath.Base(os.Args[0]))
+	fmt.Println("flags: -h")
+	fmt.Println("       -V | -version")
 	os.Exit(1)
 }
 
+func init() {
+	flag.BoolVar(&flagLShowVersion, "version", false, "Show version")
+	flag.BoolVar(&flagShowVersion, "V", false, "Show version")
+	flag.BoolVar(&flagShowUsage, "h", false, "Show help")
+}
+
 func main() {
-	if len(os.Args) == 1 {
-		usage()
-	}
+	handleFlags()
 
 	var sum uint32
 
@@ -56,4 +66,17 @@ func main() {
 	}
 
 	fmt.Println(sum)
+}
+
+func handleFlags() {
+	flag.Parse()
+
+	if flagShowVersion || flagLShowVersion {
+		fmt.Println(Version())
+		os.Exit(0)
+	}
+
+	if flagShowUsage || len(flag.Args()) == 0 {
+		usage()
+	}
 }

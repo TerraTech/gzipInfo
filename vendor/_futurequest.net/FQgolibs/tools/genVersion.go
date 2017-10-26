@@ -139,6 +139,8 @@ func (vt *VersionTemplate) getTemplateLib() string {
 	)
 	template := getTemplateHeader()
 	template += `
+// +build FQversion
+
 func init() {
 	{{ .FQversion }}Register(PROG, VERSION, BUILD)
 }
