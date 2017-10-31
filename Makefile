@@ -48,8 +48,14 @@ vgen: vendOn
 
 .PHONY: vendOff
 vendOff:
+	@echo vendOff
+	ls -l vendor
 	@\mv vendor/{,_}futurequest.net 2>/dev/null || true
+	ls -l vendor
 
 .PHONY: vendOn
 vendOn:
+	@echo vendOn
+	ls -l vendor
 	@\mv vendor/{_,}futurequest.net 2>/dev/null || true
+	ls -l vendor
