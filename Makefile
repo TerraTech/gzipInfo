@@ -17,6 +17,10 @@ $(PROG): vgen
 	@go build -ldflags="-s -w"
 	@make -s vendOff
 
+.PHONY: clean
+clean:
+	@\rm $(PROG) $(F_AUTOGEN_MAIN) $(F_AUTOGEN) 2>/dev/null || true
+
 .PHONY: fmt
 fmt:
 	@go fmt $(shell go list ./... | grep -v /vendor/)
