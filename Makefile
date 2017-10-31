@@ -19,7 +19,7 @@ $(PROG): vgen
 
 .PHONY: clean
 clean:
-	@\rm $(PROG) $(F_AUTOGEN_MAIN) $(F_AUTOGEN) 2>/dev/null || true
+	@\rm $(PROG) $(F_AUTOGEN_MAIN) $(F_AUTOGEN_LIB) 2>/dev/null || true
 
 .PHONY: fmt
 fmt:
@@ -28,8 +28,8 @@ fmt:
 .PHONY: release
 release:
 	@make -s vgen VERSION=$(VERSION_SHORT)
-	@git add $(F_AUTOGEN)
-	@git ci $(F_AUTOGEN) -m"release: $(VERSION_SHORT)"
+	@git add $(F_AUTOGEN_LIB)
+	@git ci $(F_AUTOGEN_LIB) -m"release: $(VERSION_SHORT)"
 	@git push
 	@git tag --force $(VERSION_SHORT)
 	@git push --force --tags
