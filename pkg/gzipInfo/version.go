@@ -1,5 +1,5 @@
 //==============================================================================
-// Copyright (c) 2017, FutureQuest, Inc.
+// Copyright (c) 2019, FutureQuest, Inc.
 //   https://www.FutureQuest.net
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +15,13 @@
 // limitations under the License.
 //==============================================================================
 
-package gzipInfo
+// +build tools
 
-//go:generate go run $D_VENDOR/futurequest.net/FQgolibs/tools/genVersion.go -package $GOPACKAGE -prog "$PROG" -version "$VERSION" -build "$BUILD" -lib "$LIB"
+package main
+
+import (
+	_ "futurequest.net/FQgolibs/tools"
+	_ "futurequest.net/FQgolibs/FQversion"
+)
+
+//go:generate go run $P_GENVERSION -package $GOPACKAGE -prog "$PROG" -version "$VERSION" -build "$BUILD" -import_FQversion $IMPFQVERSION -lib "$LIB"
